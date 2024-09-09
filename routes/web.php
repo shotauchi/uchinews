@@ -16,3 +16,22 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+use App\Http\Controllers\Admin\NewsController;
+Route::controller(NewsController::class)->prefix('admin')->group(function() {
+    Route::get('news/create','add');
+});
+
+//課題3
+use App\Http\Controllers\AAAController;
+
+Route::get('/XXX',['AAAController','bbb']);
+
+//課題4
+
+use App\Http\Controllers\Admin\ProfileController;
+Route::Controller(ProfileController::class)->prefix('admin')->group(function() {
+    Route::get('profile/create','add');
+    Route::get('profile/edit','edit');
+    
+});
