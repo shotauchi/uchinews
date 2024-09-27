@@ -15,4 +15,13 @@ class History2 extends Model
         'profile_id' => 'required',
         'edited_at' => 'required',
     );
+
+    /**
+     * モデルに関連付けるテーブル
+     *
+     * @var string
+     */
+    protected $table = 'histories2';
+
+    
 }
