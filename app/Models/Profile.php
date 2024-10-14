@@ -12,13 +12,14 @@ class Profile extends Model
     protected $guarded = array('id');
 
     public static $rules = array(
-        'title' => 'required',
-        'body' => 'required',
+        'name' => 'required',
+        'gender' => 'required',
+        'hobby' => 'required',
+        'introduction' => 'required',
     );
-    // Profile Modelに関連付けを行う
-    public function histories()
+    //Profile modelに関連付けを行う
+    public function histories2()
     {
         return $this->hasMany('App\Models\History2');
     }
 }
-

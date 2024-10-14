@@ -26,11 +26,11 @@ class ProfileController extends Controller
         $form = $request->all();
 
         // フォームから画像が送信されてきたら、保存して、$news->image_path に画像のパスを保存する
-        if (isset($form['image'])) {
-            $path = $request->file('image')->store('public/image');
-            $profile->image_path = basename($path);
+        if (isset($form['/admin/profile/create'])) {
+            $path = $request->file('/admin/profile/create')->store('public/admin/profile/create');
+            $profile->fill = basename($form);
         } else {
-            $profile->image_path = null;
+            $profile->fill = null;
         }
 
         // フォームから送信されてきた_tokenを削除する
