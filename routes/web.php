@@ -44,6 +44,11 @@ Route::controller(ProfileController::class)->prefix('admin')->name('admin.')->mi
     Route::get('profile/delete','delete')->name('profile.delete');
 });
 
+use App\Http\Controllers\Admin\PracticeController;
+Route::controller(PracticeController::class)->prefix('admin')->group(function() {
+    Route::get('practice/create', 'add');
+});
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -57,3 +62,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 use App\Http\Controllers\ProfileController as PublicProfileController;
 Route::get('/profile', [PublicProfileController::class, 'index'])->name('profile.index');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
