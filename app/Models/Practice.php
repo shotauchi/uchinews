@@ -14,5 +14,7 @@ class Practice extends Model
     public static $rules = array(
         'practice' => 'required',
         'answer' => 'required',
+        'programming' => 'required',
+        'content' => 'required',
     );
 }

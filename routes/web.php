@@ -45,8 +45,9 @@ Route::controller(ProfileController::class)->prefix('admin')->name('admin.')->mi
 });
 
 use App\Http\Controllers\Admin\PracticeController;
-Route::controller(PracticeController::class)->prefix('admin')->group(function() {
-    Route::get('practice/create', 'add');
+Route::controller(PracticeController::class)->prefix('admin')->name('admin.')->middleware('auth')->group(function() {
+    Route::get('practice/create', 'add')->name('practice.add');
+    Route::post('practice/create','create')->name('practice.create');
 });
 
 Auth::routes();
