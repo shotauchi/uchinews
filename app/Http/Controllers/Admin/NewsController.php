@@ -21,6 +21,13 @@ class NewsController extends Controller
     }
     public function create(Request $request)
     {
+        // ニュース記事の情報
+        //   タイトル
+        //   本文
+        //   画像
+        // をデータベーステーブルに保存する
+        
+        
         // Validationを行う
         $this->validate($request, News::$rules);
 

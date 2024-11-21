@@ -22,22 +22,14 @@ class ProfileController extends Controller
         // Validationを行う
         $this->validate($request, Profile::$rules);
 
-        $profile = new Profile;
+        $profile = new Profile;// Profile モデルの作成→情報は空っぽ
         $form = $request->all();
 
-        // フォームから画像が送信されてきたら、保存して、$news->image_path に画像のパスを保存する
-        if (isset($form['/admin/profile/create'])) {
-            $path = $request->file('/admin/profile/create')->store('public/admin/profile/create');
-            $profile->fill = basename($form);
-        } else {
-            $profile->fill = null;
-        }
+        
 
         // フォームから送信されてきた_tokenを削除する
         unset($form['_token']);
-        // フォームから送信されてきたimageを削除する
-        unset($form['image']);
-
+    
         // データベースに保存する
         $profile->fill($form);
         $profile->save();
@@ -76,24 +68,13 @@ class ProfileController extends Controller
         $profile = Profile::find($request->id);
         // 送信されてきたフォームデータを格納する
         $profile_form = $request->all();
-        
-        if ($request->remove == 'true') {
-            $profile_form['image_path'] = null;
-        } elseif ($request->file('image')) {
-            $path = $request->file('image')->store('public/image');
-            $profile_form['image_path'] = basename($path);
-        } else {
-            $profile_form['image_path'] = $profile->image_path;
-        }
 
-        unset($profile_form['image']);
         unset($profile_form['remove']);
         unset($profile_form['_token']);
 
         // 該当するデータを上書きして保存する
         $profile->fill($profile_form)->save();
         
-        // 以下を追記
         $history2 = new History2();
         $history2->profile_id = $profile->id;
         $history2->edited_at = Carbon::now();
